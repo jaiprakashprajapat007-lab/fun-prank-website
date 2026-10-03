@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter New World</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti for extra effects -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@400;600;800&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #050508;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Glowing Neon Background Effect */
+        .neon-glow {
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.6), 0 0 50px rgba(79, 172, 254, 0.4);
+        }
+
+        .neon-glow-red {
+            box-shadow: 0 0 25px rgba(255, 0, 128, 0.8), 0 0 50px rgba(255, 75, 43, 0.5);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.8), 0 0 20px rgba(0, 242, 254, 0.5);
+        }
+
+        .text-glow-funny {
+            text-shadow: 0 0 15px rgba(255, 0, 128, 0.9), 0 0 30px rgba(255, 230, 0, 0.8);
+        }
+
+        /* Pulse Animations */
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.05); filter: brightness(1.25); }
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 2s infinite ease-in-out;
+        }
+
+        /* Floating Emojis Animation */
+        .emoji-particle {
+            position: absolute;
+            user-select: none;
+            pointer-events: none;
+            animation: floatUp 4s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Portal Ring Background Effect */
+        .portal-bg {
+            background: radial-gradient(circle at center, rgba(13, 27, 42, 0.8) 0%, rgba(5, 5, 8, 1) 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center relative overflow-hidden portal-bg">
+
+    <!-- Floating Emojis Container -->
+    <div id="emoji-container" class="absolute inset-0 pointer-events-none z-0"></div>
+
+    <!-- Background Grid Lines -->
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f293d15_1px,transparent_1px),linear-gradient(to_bottom,#1f293d15_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+
+    <!-- SCREEN 1: ENTER NEW WORLD -->
+    <main id="screen-1" class="relative z-10 flex flex-col items-center justify-center text-center px-4 transition-all duration-700 ease-in-out transform scale-100 opacity-100">
+        
+        <!-- Futuristic Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/30 text-cyan-400 text-xs sm:text-sm mb-6 tracking-widest uppercase font-orbitron backdrop-blur-md">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+            Multiverse Portal v2.0
+        </div>
+
+        <!-- Main Heading -->
+        <h1 class="font-orbitron text-3xl sm:text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-200 to-indigo-400 text-glow leading-tight mb-8 max-w-3xl">
+            CLICK TO ENTER IN NEW WORLD
+        </h1>
+
+        <p class="text-slate-400 text-sm sm:text-base max-w-md mb-10 font-light">
+            Prepare yourself. You are about to step beyond the dimensions of standard reality into something truly extraordinary...
+        </p>
+
+        <!-- Glow Button -->
+        <button id="enter-btn" onclick="enterNewWorld()" class="group relative inline-flex items-center justify-center px-8 py-4 sm:px-10 sm:py-5 text-lg font-bold font-orbitron tracking-wider text-black bg-gradient-to-r from-cyan-400 to-emerald-400 rounded-2xl neon-glow animate-pulse-glow transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer">
+            <span class="flex items-center gap-3">
+                <i class="fa-solid font-black fa-rocket text-black group-hover:rotate-45 transition-transform duration-300"></i>
+                ENTER NEW WORLD
+            </span>
+        </button>
+
+        <span class="text-xs text-slate-500 mt-6 tracking-wider">⚠️ Put on headphones for peak experience</span>
+    </main>
+
+    <!-- SCREEN 2: PRANK REVEAL -->
+    <main id="screen-2" class="hidden relative z-10 flex-col items-center justify-center text-center px-4 transition-all duration-700 ease-in-out transform scale-90 opacity-0 max-w-4xl mx-auto">
+        
+        <!-- Prank Card Box -->
+        <div class="relative bg-slate-900/80 border-2 border-pink-500/50 rounded-3xl p-8 sm:p-12 backdrop-blur-xl neon-glow-red flex flex-col items-center">
+            
+            <!-- Floating Top Emoji Badge -->
+            <div class="absolute -top-10 bg-gradient-to-r from-pink-500 to-amber-500 text-white text-4xl p-4 rounded-full border-4 border-slate-950 shadow-lg animate-bounce">
+                😂
+            </div>
+
+            <div class="mt-4 mb-4 uppercase tracking-widest text-xs font-orbitron text-pink-400">
+                SYSTEM ERROR: REALITY CHECK
+            </div>
+
+            <!-- Funny Main Text -->
+            <h2 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-pink-500 to-red-500 text-glow-funny leading-tight my-6">
+                "Tera baap chood ke gaya tha kya alag duniya 😂"
+            </h2>
+
+            <p class="text-slate-300 text-base sm:text-lg mb-8 max-w-lg font-medium">
+                Wapas violent mat ho, default multiverse mein hi reh lo! 🛸🌍
+            </p>
+
+            <!-- Interactive Action Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <button onclick="resetWorld()" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 font-bold font-orbitron border border-cyan-500/30 transition-all duration-200 hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-rotate-left"></i> TRY AGAIN
+                </button>
+                <button onclick="triggerMoreFun()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold font-orbitron shadow-lg hover:brightness-110 transition-all duration-200 hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-face-laugh-squint"></i> MORE LAUGHS
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Web Audio API Sound Effects (Synthesized without external audio files)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSciFiSound() {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.4);
+            
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.4);
+        }
+
+        function playPrankSound() {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+            osc.frequency.setValueAtTime(300, audioCtx.currentTime + 0.1);
+            osc.frequency.setValueAtTime(150, audioCtx.currentTime + 0.2);
+            
+            gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.3);
+        }
+
+        // Screen Switch Logic
+        function enterNewWorld() {
+            playSciFiSound();
+
+            const s1 = document.getElementById('screen-1');
+            const s2 = document.getElementById('screen-2');
+
+            // Fade out Screen 1
+            s1.classList.remove('scale-100', 'opacity-100');
+            s1.classList.add('scale-110', 'opacity-0');
+
+            setTimeout(() => {
+                s1.classList.add('hidden');
+                s2.classList.remove('hidden');
+                s2.classList.add('flex');
+
+                // Fade in Screen 2
+                setTimeout(() => {
+                    s2.classList.remove('scale-90', 'opacity-0');
+                    s2.classList.add('scale-100', 'opacity-100');
+                    playPrankSound();
+                    spawnEmojis();
+                    triggerConfetti();
+                }, 50);
+            }, 500);
+        }
+
+        function resetWorld() {
+            const s1 = document.getElementById('screen-1');
+            const s2 = document.getElementById('screen-2');
+
+            s2.classList.remove('scale-100', 'opacity-100');
+            s2.classList.add('scale-90', 'opacity-0');
+
+            setTimeout(() => {
+                s2.classList.add('hidden');
+                s2.classList.remove('flex');
+                s1.classList.remove('hidden');
+
+                setTimeout(() => {
+                    s1.classList.remove('scale-110', 'opacity-0');
+                    s1.classList.add('scale-100', 'opacity-100');
+                }, 50);
+            }, 500);
+        }
+
+        // Spawn Floating Emojis Effect
+        function spawnEmojis() {
+            const container = document.getElementById('emoji-container');
+            container.innerHTML = '';
+            const emojis = ['😂', '🛸', '🌍', '💨', '🤣', '💀', '🔥'];
+
+            for (let i = 0; i < 25; i++) {
+                const span = document.createElement('span');
+                span.classList.add('emoji-particle');
+                span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                span.style.left = Math.random() * 100 + 'vw';
+                span.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                span.style.fontSize = (Math.random() * 20 + 24) + 'px';
+                container.appendChild(span);
+            }
+        }
+
+        // Trigger Playful Confetti
+        function triggerConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 80,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+        }
+
+        function triggerMoreFun() {
+            playPrankSound();
+            spawnEmojis();
+            triggerConfetti();
+        }
+    </script>
+</body>
+</html>
